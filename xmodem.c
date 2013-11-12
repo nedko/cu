@@ -24,6 +24,7 @@
 #include <string.h>
 #include <termios.h>
 #include <unistd.h>
+#include <inttypes.h>
 
 #include "cu.h"
 
