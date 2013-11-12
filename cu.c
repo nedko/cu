@@ -52,6 +52,10 @@ enum {
 	STATE_TILDE
 } last_state = STATE_NEWLINE;
 
+#if !defined(__dead)
+#define __dead __attribute__((__noreturn__))
+#endif
+
 __dead void	usage(void);
 void		signal_event(int, short, void *);
 void		stream_read(struct bufferevent *, void *);
@@ -167,7 +171,7 @@ void
 signal_event(int fd, short events, void *data)
 {
 	restore_termios();
-	printf("\r\n[SIG%s]\n", sys_signame[fd]);
+	printf("\r\n[SIG%d]\n", fd);
 
 	exit(0);
 }
@@ -187,7 +191,9 @@ set_termios(void)
 	tio.c_cc[VMIN] = 1;
 	tio.c_cc[VTIME] = 0;
 	tio.c_cc[VDISCARD] = _POSIX_VDISABLE;
+#if defined(VDSUSP)
 	tio.c_cc[VDSUSP] = _POSIX_VDISABLE;
+#endif
 	tio.c_cc[VINTR] = _POSIX_VDISABLE;
 	tio.c_cc[VLNEXT] = _POSIX_VDISABLE;
 	tio.c_cc[VQUIT] = _POSIX_VDISABLE;

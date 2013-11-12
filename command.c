@@ -229,11 +229,13 @@ do_command(char c)
 	case 'C':
 		connect_command();
 		break;
+#if defined(TIOCCDTR)
 	case 'D':
 		ioctl(line_fd, TIOCCDTR, NULL);
 		sleep(1);
 		ioctl(line_fd, TIOCSDTR, NULL);
 		break;
+#endif
 	case 'R':
 		start_record();
 		break;
@@ -263,7 +265,9 @@ do_command(char c)
 		    "~$      pipe local command to remote host\r\n"
 		    "~>      send file to remote host\r\n"
 		    "~C      connect program to remote host\r\n"
+#if defined(TIOCCDTR)
 		    "~D      de-assert DTR line briefly\r\n"
+#endif
 		    "~R      start recording to file\r\n"
 		    "~S      set speed\r\n"
 		    "~X      send file with XMODEM\r\n"
