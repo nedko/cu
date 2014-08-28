@@ -187,6 +187,7 @@ set_termios(void)
 	memcpy(&tio, &saved_tio, sizeof(tio));
 	tio.c_lflag &= ~(ICANON|IEXTEN|ECHO);
 	tio.c_iflag &= ~(INPCK|ICRNL);
+	tio.c_iflag &= ~(IXON);       /* disable XON/XOFF flow control on output. */
 	tio.c_oflag &= ~OPOST;
 	tio.c_cc[VMIN] = 1;
 	tio.c_cc[VTIME] = 0;
