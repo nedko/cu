@@ -18,7 +18,7 @@
 #include <sys/time.h>
 #include <sys/resource.h>
 
-int closefrom(int start)
+void closefrom(int start)
 {
 	struct rlimit max_fds;
 	rlim_t fd;

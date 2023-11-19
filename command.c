@@ -32,6 +32,18 @@
 
 #include "cu.h"
 
+/* OpenBSD implementation of closeret() returns int,
+   while FreeBSD and Linux libbsd are void instead */
+//#define CLOSEFROM_INTRET 1
+
+/* closefrom() is implemented in bsd.c */
+#if CLOSEFROM_INTRET
+int
+#else
+void
+#endif
+closefrom(int start);
+
 void	pipe_command(void);
 void	connect_command(void);
 void	send_file(void);
@@ -68,8 +80,15 @@ pipe_command(void)
 		if (dup2(line_fd, STDOUT_FILENO) == -1)
 			_exit(1);
 
-		if (closefrom(STDERR_FILENO + 1) != 0)
-			_exit(1);
+#if CLOSEFROM_INTRET
+		if (
+#endif
+			closefrom(STDERR_FILENO + 1)
+#if CLOSEFROM_INTRET
+			!= 0)
+			_exit(1)
+#endif
+			  ;
 
 		execl(_PATH_BSHELL, "sh", "-c", cmd, (void*)NULL);
 		_exit(1);
@@ -116,8 +135,15 @@ connect_command(void)
 		if (dup2(line_fd, STDIN_FILENO) == -1)
 			_exit(1);
 
-		if (closefrom(STDERR_FILENO + 1) != 0)
-			_exit(1);
+#if CLOSEFROM_INTRET
+		if (
+#endif
+			closefrom(STDERR_FILENO + 1)
+#if CLOSEFROM_INTRET
+			!= 0)
+			_exit(1)
+#endif
+			  ;
 
 		execl(_PATH_BSHELL, "sh", "-c", cmd, (void*)NULL);
 		_exit(1);
