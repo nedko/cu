@@ -232,7 +232,7 @@ set_line(int speed)
 void
 stream_read(struct bufferevent *bufev, void *data)
 {
-	char	*new_data, *ptr;
+	unsigned char	*new_data, *ptr;
 	size_t	 new_size;
 	int	 state_change;
 
@@ -277,7 +277,7 @@ stream_error(struct bufferevent *bufev, short what, void *data)
 void
 line_read(struct bufferevent *bufev, void *data)
 {
-	char	*new_data;
+	unsigned char	*new_data;
 	size_t	 new_size;
 
 	new_data = EVBUFFER_DATA(line_ev->input);

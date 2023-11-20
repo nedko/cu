@@ -65,7 +65,7 @@ xmodem_crc16(const u_char *buf, size_t len)
 }
 
 int
-xmodem_read(char *c)
+xmodem_read(u_char *c)
 {
 	for (;;) {
 		switch (read(line_fd, c, 1)) {
