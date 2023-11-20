@@ -1,6 +1,6 @@
 /* -*- Mode: C ; c-basic-offset: 2; indent-tabs-mode: t; tab-width: 2 -*- */
 /*
- * Copyright (c) 2013 Nedko Arnaudov <nedko@arnaudov.name>
+ * Copyright (c) 2013-2023 Nedko Arnaudov
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -15,6 +15,7 @@
  * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+#include <unistd.h>
 #include <sys/time.h>
 #include <sys/resource.h>
 

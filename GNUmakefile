@@ -1,11 +1,15 @@
-CFLAGS := -O0
-CFLAGS += -g
-CFLAGS += -Wall
-CFLAGS += -Wextra
-#CFLAGS += -s
+FLAGS := -O0
+FLAGS += -g
+FLAGS += -Wall
+FLAGS += -Wextra
+#FLAGS += -Wno-unused-parameter
+#FLAGS += -Wno-pointer-sign -Wno-implicit-fallthrough
+#FLAGS += -s
+FLAGS += -D_GNU_SOURCE
+FLAGS += $(shell pkg-config --cflags --libs libbsd-overlay libevent)
 
 cu: *.c
-	gcc $(CFLAGS) *.c -o cu -levent
+	gcc $(FLAGS) *.c -o cu
 
 .PHONY: clean
 clean:
