@@ -65,6 +65,7 @@ pipe_command(void)
 	switch (pid = fork()) {
 	case -1:
 		cu_err(1, "fork");
+		_exit(1);
 	case 0:
 		fd = open(_PATH_DEVNULL, O_RDWR);
 		if (fd < 0 || dup2(fd, STDIN_FILENO) == -1)
@@ -123,6 +124,7 @@ connect_command(void)
 	switch (pid = fork()) {
 	case -1:
 		cu_err(1, "fork");
+		_exit(1);
 	case 0:
 		if (signal(SIGINT, SIG_DFL) == SIG_ERR)
 			_exit(1);
