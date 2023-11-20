@@ -14,3 +14,5 @@ cu: *.c
 .PHONY: clean
 clean:
 	rm -vf cu
+
+cu: GNUmakefile
