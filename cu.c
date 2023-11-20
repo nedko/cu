@@ -168,7 +168,10 @@ main(int argc, char **argv)
 }
 
 void
-signal_event(int fd, short events, void *data)
+signal_event(
+	int fd,
+	short events __attribute__((unused)),
+	void *data __attribute__((unused)))
 {
 	restore_termios();
 	printf("\r\n[SIG%d]\n", fd);
@@ -230,7 +233,9 @@ set_line(int speed)
 }
 
 void
-stream_read(struct bufferevent *bufev, void *data)
+stream_read(
+	struct bufferevent *bufev __attribute__((unused)),
+	void *data __attribute__((unused)))
 {
 	unsigned char	*new_data, *ptr;
 	size_t	 new_size;
@@ -269,13 +274,18 @@ stream_read(struct bufferevent *bufev, void *data)
 }
 
 void
-stream_error(struct bufferevent *bufev, short what, void *data)
+stream_error(
+	struct bufferevent *bufev __attribute__((unused)),
+	short what __attribute__((unused)),
+	void *data __attribute__((unused)))
 {
 	event_loopexit(NULL);
 }
 
 void
-line_read(struct bufferevent *bufev, void *data)
+line_read(
+	struct bufferevent *bufev __attribute__((unused)),
+	void *data __attribute__((unused)))
 {
 	unsigned char	*new_data;
 	size_t	 new_size;
@@ -293,7 +303,10 @@ line_read(struct bufferevent *bufev, void *data)
 }
 
 void
-line_error(struct bufferevent *bufev, short what, void *data)
+line_error(
+	struct bufferevent *bufev __attribute__((unused)),
+	short what __attribute__((unused)),
+	void *data __attribute__((unused)))
 {
 	event_loopexit(NULL);
 }

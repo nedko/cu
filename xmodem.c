@@ -41,7 +41,7 @@
 volatile sig_atomic_t xmodem_stop;
 
 void
-xmodem_signal(int sig)
+xmodem_signal(int sig __attribute__((unused)))
 {
 	xmodem_stop = 1;
 }

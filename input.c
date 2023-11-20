@@ -38,7 +38,7 @@ volatile sig_atomic_t input_stop;
 void	input_signal(int);
 
 void
-input_signal(int sig)
+input_signal(int sig __attribute__((unused)))
 {
 	input_stop = 1;
 }
